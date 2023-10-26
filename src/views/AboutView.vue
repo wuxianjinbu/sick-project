@@ -1,5 +1,9 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+   <n-button type="primary">
+      Tertiary
+    </n-button>
+
+    <n-button strong secondary type="primary">
+      Primary
+    </n-button>
 </template>
