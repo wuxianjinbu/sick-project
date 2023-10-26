@@ -235,6 +235,7 @@ const removePre = (idx) => {
 .main {
   // background-color: aqua;
   // overflow: auto; //触发BFC，解决外边距塌陷
+  // git测试
   display: flex;
   justify-content: center;
 
