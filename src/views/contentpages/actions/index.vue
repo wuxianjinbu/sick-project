@@ -89,10 +89,10 @@
             <div class="text">this is content test any word could works</div>
             <div>
               <n-image-group show-toolbar-tooltip>
-                <n-space style="justify-content: center !important;">
-                  <n-image class="image" object-fit="cover" v-for="i, idx in imgs" :key="idx" width="200" height="200"
-                    :src="i.img" fallback-src="../../../assets/loadingFail.jpg" />
-                </n-space>
+                  <div class="gridBox">
+                    <n-image class="image" v-for="i, idx in imgs" :key="idx"  object-fit="cover" height="200" width="200"
+                      :src="i.img" fallback-src="../../../assets/loadingFail.jpg" />
+                  </div>
               </n-image-group>
             </div>
 
@@ -201,6 +201,23 @@ const removePre = (idx) => {
     margin-right: 1%;
   }
 }
+.content{
+  .image:first-child{
+    justify-content: right;
+  }
+  .image:nth-child(3n+2){
+    justify-content: center;
+  }
+  .image:nth-child(3n+4){
+    justify-content: right;
+  }
+  .gridBox{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  // background-color: aqua ;
+}
+
+}
 
 .uploadImgPre{
   position: relative;
@@ -235,7 +252,6 @@ const removePre = (idx) => {
 .main {
   // background-color: aqua;
   // overflow: auto; //触发BFC，解决外边距塌陷
-  // git测试22222
   display: flex;
   justify-content: center;
 
