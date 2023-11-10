@@ -61,7 +61,7 @@
       </n-card>
     </div>
     <div class="left">
-      <n-card class="actionbox" v-for="i, idx in 5" :key="idx">
+      <n-card class="actionbox" v-for="i, idx in content" :key="idx">
         <!-- 加载骨架 -->
         <div v-if="false" class="hearder-skeleton">
           <n-skeleton round width="40px" height="40px" />
@@ -85,12 +85,12 @@
         <n-skeleton v-if="false" text height="90px" style="margin-top: 2%;" />
 
         <template v-else>
-          <div class="content">
-            <div class="text">this is content test any word could works</div>
+          <div  :class="[i.imgs.length==1?'contentequalto1':i.imgs.length==2?'contentequalto2':'contentmorethan2']">
+            <div class="text">this is content test any word could works{{ i.text }}</div>
             <div>
               <n-image-group show-toolbar-tooltip>
                   <div class="gridBox">
-                    <n-image class="image" v-for="i, idx in imgs" :key="idx"  object-fit="cover" height="200" width="200"
+                    <n-image class="image" v-for="i, idx in i.imgs" :key="idx"  object-fit="cover" height="200" width="200"
                       :src="i.img" fallback-src="../../../assets/loadingFail.jpg" />
                   </div>
               </n-image-group>
@@ -130,17 +130,37 @@ import 'vue3-emoji-picker/css'
 const { proxy } = getCurrentInstance()
 const url = ref(proxy.$url)
 
-const imgs = reactive([
-  { img: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg' },
-  { img: url.value + '/images/ebook/大脑修复术.jpg' },
-  { img: url.value + '/images/ebook/上帝的骰子.jpg' },
-  { img: url.value + '/images/reader/back1.jpg' },
-  { img: url.value + '/images/reader/back5.jpg' },
-  { img: url.value + '/images/reader/back2.jpg' },
-  { img: url.value + '/images/reader/wallpaper1.png' },
-  { img: url.value + '/images/reader/wallpaper2.png' },
-  { img: url.value + '/images/reader/wallpaper3.png' }
-])
+const content = reactive(
+  [{
+    text: '1111',
+    imgs: [
+      { img: url.value + '/images/reader/wallpaper3.png' }
+    ]
+  },
+  {
+    text: '2222',
+    imgs: [
+      { img: url.value + '/images/reader/back5.jpg' },
+      { img: url.value + '/images/reader/back2.jpg' }
+    ]
+  },
+  {
+    text: '3333',
+    imgs: [
+      { img: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg' },
+      { img: url.value + '/images/ebook/大脑修复术.jpg' },
+      { img: url.value + '/images/ebook/上帝的骰子.jpg' },
+      { img: url.value + '/images/reader/back1.jpg' },
+      { img: url.value + '/images/reader/back5.jpg' },
+      { img: url.value + '/images/reader/back2.jpg' },
+      { img: url.value + '/images/reader/wallpaper1.png' },
+      { img: url.value + '/images/reader/wallpaper2.png' },
+      { img: url.value + '/images/reader/wallpaper3.png' }
+    ]
+  }
+
+  ]
+)
 
 // 年月日时间方法
 const getDateString = (date) => {
@@ -201,7 +221,7 @@ const removePre = (idx) => {
     margin-right: 1%;
   }
 }
-.content{
+.contentmorethan2{
   .image:first-child{
     justify-content: right;
   }
@@ -215,10 +235,27 @@ const removePre = (idx) => {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   // background-color: aqua ;
+  grid-row-gap:10px;
 }
 
 }
 
+.contentequalto1{
+  .gridBox{
+    display: flex;
+    justify-content: center;
+    // background-color: aqua ;
+
+  }
+}
+
+.contentequalto2{
+  .gridBox{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  }
+}
 .uploadImgPre{
   position: relative;
 }
